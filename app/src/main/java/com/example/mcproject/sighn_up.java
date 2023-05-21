@@ -8,27 +8,26 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class sighn_up extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sighn_up);
         configureCreateAccountButton();
-        Log.d("","test");
+        Log.d("", "test");
     }
 
-    private void configureCreateAccountButton(){
 
-        Button createAcc = (Button) findViewById(R.id.btnCreateAccount);
+    private void configureCreateAccountButton() {
+
+        Button createAcc = (Button) findViewById(R.id.buttonSighnUp);
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,sighn_up.class));
+                startActivity(new Intent(sighn_up.this, MainActivity.class));
             }
         });
 
     }
-
-
 }
