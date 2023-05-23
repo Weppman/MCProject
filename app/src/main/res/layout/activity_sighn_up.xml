@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textViewID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -54,7 +54,7 @@
         android:layout_marginTop="48dp"
         android:text="Phone Number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewID" />
 
     <TextView
         android:id="@+id/textViewAddress"
@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewFName" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textViewBiography"
         android:layout_width="64dp"
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
@@ -133,7 +133,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewID" />
 
     <EditText
         android:id="@+id/editTextTextPhoneNumber"
@@ -185,7 +185,7 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewBiography" />
 
     <Button
         android:id="@+id/buttonSighnUp"
@@ -244,7 +244,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewFirstName"
+        android:id="@+id/textViewFirstNameError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -253,7 +253,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewLastName"
+        android:id="@+id/textViewLastNameError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -269,5 +269,15 @@
         android:layout_marginTop="536dp"
         app:layout_constraintStart_toEndOf="@+id/editTextTextMultiLineBiography"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonGoBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="Go Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonSighnUp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
