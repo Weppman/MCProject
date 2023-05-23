@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        configureSignInButton();
         configureCreateAccountButton();
         Log.d("","test");
     }
@@ -30,5 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void configureSignInButton(){
+
+        Button createAcc = (Button) findViewById(R.id.btnSighnIn);
+        createAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,main_page.class));
+            }
+        });
+
+    }
 
 }
