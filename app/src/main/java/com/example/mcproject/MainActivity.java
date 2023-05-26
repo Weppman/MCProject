@@ -37,10 +37,25 @@ public class MainActivity extends AppCompatActivity {
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,main_page.class));
+                //startActivity(new Intent(MainActivity.this,main_page.class));
+                checkIfValidLogin();
+
             }
         });
 
+    }
+    public void checkIfValidLogin(){
+        boolean t=true;
+        if(t==true){ //UNFINISHED Add code to check for valid  login
+            openDialog();
+            startActivity(new Intent(MainActivity.this,main_page.class));
+        }
+        else
+            openDialog();
+    }
+    public void openDialog(){
+        FailedSignIn failedSignIn = new FailedSignIn();
+        failedSignIn.show(getSupportFragmentManager(),"Error");
     }
 
 }

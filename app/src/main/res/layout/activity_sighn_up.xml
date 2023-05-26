@@ -103,7 +103,9 @@
         android:layout_marginBottom="4dp"
         android:text="Anonymous"
         app:layout_constraintBottom_toTopOf="@+id/buttonSighnUp"
-        tools:layout_editor_absoluteX="-4dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextTextUsername"
