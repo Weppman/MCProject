@@ -1,17 +1,30 @@
 package com.example.mcproject;
 
+
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import org.json.JSONArray;
 
+import java.io.IOException;
+
+import javax.security.auth.callback.Callback;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class MainActivity extends AppCompatActivity {
+    OkHttpClient client = new OkHttpClient();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +35,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         configureSignInButton();
         configureCreateAccountButton();
+        configureTestButton();
         Log.d("","test");
+
+
+
     }
 
     private void configureCreateAccountButton(){
@@ -50,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public void checkIfValidLogin(){
         boolean t=true;
         if(t==true){ //UNFINISHED Add code to check for valid  login
@@ -62,6 +80,25 @@ public class MainActivity extends AppCompatActivity {
     public void openDialog(){
         FailedSignIn failedSignIn = new FailedSignIn();
         failedSignIn.show(getSupportFragmentManager(),"Error");
+    }
+
+    private void configureTestButton(){
+
+        Button createAcc = (Button) findViewById(R.id.buttonTest);
+        createAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OkHttpClass ok = new OkHttpClass();
+                try {
+                    ok.run();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
+
     }
 
 }
