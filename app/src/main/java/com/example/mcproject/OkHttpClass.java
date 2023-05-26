@@ -61,7 +61,7 @@ public class OkHttpClass {
 
         });
         while(!finished){
-
+            Thread.sleep(100);
         }
 
         return hold;
