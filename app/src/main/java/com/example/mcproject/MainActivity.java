@@ -5,6 +5,7 @@ package com.example.mcproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telecom.Call;
 import android.util.Log;
@@ -23,6 +24,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     OkHttpClient client = new OkHttpClient();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,36 +32,37 @@ public class MainActivity extends AppCompatActivity {
         configureSignInButton();
         configureCreateAccountButton();
         configureTestButton();
-        Log.d("","test");
 
+        Log.d("", "test");
 
 
     }
 
-    private void configureCreateAccountButton(){
+    private void configureCreateAccountButton() {
 
         Button createAcc = (Button) findViewById(R.id.btnCreateAccount);
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,sighn_up.class));
+                startActivity(new Intent(MainActivity.this, sighn_up.class));
             }
         });
 
     }
 
-    private void configureSignInButton(){
+    private void configureSignInButton() {
 
         Button createAcc = (Button) findViewById(R.id.btnSighnIn);
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,main_page.class));
+                startActivity(new Intent(MainActivity.this, main_page.class));
             }
         });
 
     }
-    private void configureTestButton(){
+
+    public void configureTestButton() {
 
         Button createAcc = (Button) findViewById(R.id.buttonTest);
         createAcc.setOnClickListener(new View.OnClickListener() {
@@ -67,14 +70,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 OkHttpClass ok = new OkHttpClass();
                 try {
-                    ok.run();
+
+                    System.out.println( ok.run());
+
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
 
             }
         });
-
     }
 
+
 }
+
