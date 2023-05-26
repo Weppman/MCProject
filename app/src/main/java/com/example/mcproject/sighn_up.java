@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +20,9 @@ public class sighn_up extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();//This hides title and action bar
         setContentView(R.layout.activity_sighn_up);
         configureCreateAccountButton();
         configureGoBackButton();
@@ -32,7 +37,7 @@ public class sighn_up extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (checkID()&checkPassword()&checkUsername()&checkPhoneNumber()&checkAddress()&checkFirstName()&checkLastName()&checkBiography()){
+                if (checkUsername()&&checkPassword()&&checkPhoneNumber()&&checkAddress()&&checkFirstName()&&checkLastName()&&checkBiography()){
                     // Add code to insert into database
                     startActivity(new Intent(sighn_up.this, MainActivity.class));
                 }
@@ -45,16 +50,10 @@ public class sighn_up extends AppCompatActivity {
     public boolean checkUsername(){
         EditText et1 = (EditText) findViewById(R.id.editTextTextUsername);
         if (et1.getText().length() != 0){
-            TextView error = (TextView) findViewById(R.id.textViewUsernameError);
-
-            error.setText("");
             return true;
 
         }else{
-            TextView error = (TextView) findViewById(R.id.textViewUsernameError);
-            error.setTextColor(Color.RED);
-            error.setText("Please Enter A Username");
-            Log.d("","inside else");
+            openDialog("Invalid Username was entered");
             return false;
         }
 
@@ -63,50 +62,16 @@ public class sighn_up extends AppCompatActivity {
     public boolean checkPassword(){
         EditText et1 = (EditText) findViewById(R.id.editTextTextPassword);
         if (et1.getText().length() != 0){
-            TextView error = (TextView) findViewById(R.id.textViewPasswordError);
-
-            error.setText("");
             return true;
 
         }else{
-            TextView error = (TextView) findViewById(R.id.textViewPasswordError);
-            error.setTextColor(Color.RED);
-            error.setText("Please Enter A Password");
+            openDialog("Invalid Password was entered");
             return false;
         }
 
 
     }
 
-    public boolean checkID(){
-        EditText et1 = (EditText) findViewById(R.id.editTextTextID);
-        if (et1.getText().length() != 0){
-            try {
-                long iTest = Long.parseLong(String.valueOf(et1.getText()));
-                if (et1.getText().length() == 13){
-                    TextView error = (TextView) findViewById(R.id.textViewIDError);
-                    error.setText("");
-                    return true;
-                }else{
-                    TextView error = (TextView) findViewById(R.id.textViewIDError);
-                    error.setTextColor(Color.RED);
-                    error.setText("ID is Incorrect Length");
-                    return false;
-                }
-            } catch (Exception e){
-                TextView error = (TextView) findViewById(R.id.textViewIDError);
-                error.setTextColor(Color.RED);
-                error.setText("Please enter a valid Phone Number");
-                return false;
-
-            }
-        }else{
-            TextView error = (TextView) findViewById(R.id.textViewIDError);
-            error.setTextColor(Color.RED);
-            error.setText("Please Enter An ID");
-            return false;
-        }
-    }
 
     public boolean checkPhoneNumber(){
         EditText et1 = (EditText) findViewById(R.id.editTextTextPhoneNumber);
@@ -114,25 +79,17 @@ public class sighn_up extends AppCompatActivity {
             try {
                 long iTest = Long.parseLong(String.valueOf(et1.getText()));
                 if (et1.getText().length() == 10){
-                    TextView error = (TextView) findViewById(R.id.textViewPhoneNumberError);
-                    error.setText("");
                     return true;
                 }else{
-                    TextView error = (TextView) findViewById(R.id.textViewPhoneNumberError);
-                    error.setTextColor(Color.RED);
-                    error.setText("PhoneNumber is Incorrect Length");
+                    openDialog("Invalid Phone number was entered");
                     return false;
                 }
             } catch (Exception e){
-                TextView error = (TextView) findViewById(R.id.textViewPhoneNumberError);
-                error.setTextColor(Color.RED);
-                error.setText("Please enter a valid ID");
+                openDialog("Invalid Phone number was entered");
                 return false;
             }
         }else{
-            TextView error = (TextView) findViewById(R.id.textViewPhoneNumberError);
-            error.setTextColor(Color.RED);
-            error.setText("Please Enter A Phone Number");
+            openDialog("Invalid Phone number was entered");
             return false;
         }
     }
@@ -140,15 +97,10 @@ public class sighn_up extends AppCompatActivity {
     public boolean checkAddress(){
         EditText et1 = (EditText) findViewById(R.id.editTextTextAddress);
         if (et1.getText().length() != 0){
-            TextView error = (TextView) findViewById(R.id.textViewAdressError);
-
-            error.setText("");
             return true;
 
         }else{
-            TextView error = (TextView) findViewById(R.id.textViewAdressError);
-            error.setTextColor(Color.RED);
-            error.setText("Please Enter A Address");
+            openDialog("Invalid Address was entered");
             return false;
         }
     }
@@ -156,45 +108,33 @@ public class sighn_up extends AppCompatActivity {
     public boolean checkFirstName(){
         EditText et1 = (EditText) findViewById(R.id.editTextTextFName);
         if (et1.getText().length() != 0){
-            TextView error = (TextView) findViewById(R.id.textViewFirstNameError);
 
-            error.setText("");
             return true;
 
         }else{
-            TextView error = (TextView) findViewById(R.id.textViewFirstNameError);
-            error.setTextColor(Color.RED);
-            error.setText("Please Enter A First Name");
+            openDialog("Invalid First Name was entered");
             return false;
         }
     }
     public boolean checkLastName(){
         EditText et1 = (EditText) findViewById(R.id.editTextTextLName);
         if (et1.getText().length() != 0){
-            TextView error = (TextView) findViewById(R.id.textViewLastNameError);
 
-            error.setText("");
             return true;
 
         }else{
-            TextView error = (TextView) findViewById(R.id.textViewLastNameError);
-            error.setTextColor(Color.RED);
-            error.setText("Please Enter A Last Name");
+            openDialog("Invalid Last Name was entered");
             return false;
         }
     }
     public boolean checkBiography(){
         EditText et1 = (EditText) findViewById(R.id.editTextTextMultiLineBiography);
         if (et1.getText().length() != 0){
-            TextView error = (TextView) findViewById(R.id.textViewBiographyError);
 
-            error.setText("");
             return true;
 
         }else{
-            TextView error = (TextView) findViewById(R.id.textViewBiographyError);
-            error.setTextColor(Color.RED);
-            error.setText("Please Enter A Biography");
+            openDialog("Invalid Biography was entered");
             return false;
         }
     }
@@ -209,6 +149,12 @@ public class sighn_up extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void openDialog(String message){
+        FailedSignUp failedSignUp = new FailedSignUp();
+        failedSignUp.setMsg(message);
+        failedSignUp.show(getSupportFragmentManager(),"Error");
     }
 
 }
