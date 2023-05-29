@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         configureSignInButton();
         configureCreateAccountButton();
-        configureTestButton();
+
 
         Log.d("", "test");
 
