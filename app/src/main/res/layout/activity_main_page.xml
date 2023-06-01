@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".main_page">
+    tools:context=".MainActivity">
 
-
-
-
-        <TableLayout
-            android:id="@+id/tabMainPage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpagerMain"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:id="@+id/container"
+        android:layout_above="@+id/bottom_navigation"
+        android:background="#2E2E2E"
+        />
 
-</LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#424242"
+        app:itemTextColor="#FFFFFF"
+        app:menu="@menu/bottom_nav_menu"
+        />
+
+
+</RelativeLayout>
