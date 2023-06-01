@@ -1,17 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2E2E2E"
-    tools:context=".SettingFragment">
+    android:background="#2E2E2E">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Setting Fragment"
-        android:textSize="25dp"
+        android:id="@+id/Setting"
+        android:text="Setting"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Update_Anonymous"
+        android:layout_below="@id/Setting"
+        android:textColor="@color/white"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="10dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="32dp"
+        android:text="Anoymous Change" />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Anonymous"
+        android:layout_below="@id/Update_Anonymous"
+        android:background="#3E3E3E"
+        android:outlineProvider="background"
+        android:text="Anonymous"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="627dp"
+        android:layout_marginLeft="45dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/PasswordUpdate"
+        android:layout_below="@id/PhoneNoUpdate"
+        android:textColor="@color/white"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="5dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="99dp"
+        android:text="Change Password"/>
+    <EditText
+        android:id="@+id/Password"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_below="@id/PasswordUpdate"
+        android:layout_marginLeft="45dp"
+        android:background="#3E3E3E"
+        android:ems="10"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="Change password"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="119dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Address"
+        android:layout_below="@+id/Password"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="5dp"
+        android:text="Change Address"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="301dp"/>
+    <EditText
+        android:id="@+id/ChangeAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_below="@id/Address"
+        android:layout_marginLeft="45dp"
+        android:background="#3E3E3E"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Change address"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="317dp"/>
+
+    <TextView
+        android:id="@+id/Biography"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ChangeAddress"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="5dp"
+        android:text="Change Biography"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="497dp" />
+
+    <EditText
+        android:id="@+id/BiographyUpdate"
+        android:layout_width="319dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/Biography"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="9dp"
+        android:background="#3E3E3E"
+        android:ems="10"
+        android:gravity="fill"
+        android:hint="Update your biography"
+        android:inputType="textMultiLine"
         android:textColor="#FFFFFF"
-        android:layout_centerInParent="true"/>
+        android:textColorHint="@color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="522dp" />
+
+    <TextView
+        android:id="@+id/PhoneNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Anonymous"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="5dp"
+        android:text="Change Phone Number"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="234dp" />
+
+    <EditText
+        android:id="@+id/PhoneNoUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@+id/PhoneNo"
+        android:layout_marginLeft="45dp"
+        android:background="#3E3E3E"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Change Phone Number"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="253dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ButtonAnoymous"
+        android:textColor="@color/white"
+        android:text="Update Anoymous"
+        android:textSize="10sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/Update_Anonymous"
+        android:layout_marginRight="15dp"
+
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/CellNoButton"
+        android:textColor="@color/white"
+        android:text="Update Cell No"
+        android:textSize="10sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/PhoneNo"
+        android:layout_marginRight ="15dp"
+
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/PasswordButton"
+        android:textColor="@color/white"
+        android:text="Update Password"
+        android:textSize="10sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/PasswordUpdate"
+        android:layout_marginRight="15dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/AddressButton"
+        android:textColor="@color/white"
+        android:text="Update Address"
+        android:textSize="10sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/Address"
+        android:layout_marginRight="15dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/BiographyButton"
+        android:textColor="@color/white"
+        android:text="Update Biography"
+        android:textSize="10sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/BiographyUpdate"
+        android:layout_marginLeft="45dp"
+        />
+
+
 
 </RelativeLayout>

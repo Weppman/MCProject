@@ -36,16 +36,16 @@ public class main_page extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 //System.out.println((int)(item.getItemId()) );
                 switch ((int)(item.getItemId()) ){
-                    case 2131230943:
+                    case (int)(R.id.home):
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
                         return true;
-                    case 2131231240:
+                    case (int)(R.id.donate):
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,donateFragment).commit();
                         return true;
-                    case 2131231241:
+                    case (int)(R.id.donationList):
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,listFragment).commit();
                         return true;
-                    case 2131231242:
+                    case (int)(R.id.setting):
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,settingFragment).commit();
                         return true;
                 }
