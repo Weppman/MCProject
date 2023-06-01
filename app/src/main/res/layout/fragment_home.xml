@@ -28,5 +28,4 @@
         android:layout_width="wrap_content"
         android:id="@+id/spacer1"
         android:layout_height="wrap_content" />
-
 </RelativeLayout>
