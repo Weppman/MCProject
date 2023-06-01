@@ -67,7 +67,7 @@ public class sighn_up extends AppCompatActivity {
                             throw new RuntimeException(e);
                         }
 
-                        startActivity(new Intent(sighn_up.this, OkHttpClass.MainActivity.class));
+                        startActivity(new Intent(sighn_up.this, MainActivity.class));
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -187,7 +187,7 @@ public class sighn_up extends AppCompatActivity {
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(sighn_up.this, OkHttpClass.MainActivity.class));
+                startActivity(new Intent(sighn_up.this, MainActivity.class));
             }
         });
 

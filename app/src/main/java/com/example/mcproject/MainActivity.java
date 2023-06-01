@@ -13,10 +13,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
 import javax.security.auth.callback.Callback;
 
@@ -25,7 +28,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
-    OkHttpClient client = new OkHttpClient();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(new Intent(MainActivity.this, main_page.class));
 
                 //startActivity(new Intent(MainActivity.this,main_page.class));
-                checkIfValidLogin();
+                try {
+                    checkIfValidLogin();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
 
             }
@@ -77,11 +84,54 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void checkIfValidLogin(){
-        boolean t=true;
-        if(t==true){ //UNFINISHED Add code to check for valid  login
+    public void checkIfValidLogin() throws Exception {
+        EditText ed1 = (EditText) findViewById(R.id.editTextUsername);
+        EditText ed2 = (EditText) findViewById(R.id.editTextPassword);
+        OkHttpClass ok = new OkHttpClass();
+        CompletableFuture<String> json = ok.checkIfPassWordUserNameCorrect(ed1.getText().toString());
+        Log.d("GET JSON STRING", json.get());
+        if (!json.get().equalsIgnoreCase("[]")){
+            JSONArray JSA = new JSONArray(json.get());
+            JSONObject JSO = JSA.getJSONObject(0);
+            String name = JSO.getString("Username");
+            String password = JSO.getString("Password");
+            String gname = ed1.getText().toString();
+            String gpass = ed2.getText().toString();
+
+            if (name.equals(gname) && password.equals(gpass)){
+                startActivity(new Intent(MainActivity.this,main_page.class));
+
+
+            }else{
+
+                openDialog();
+            }
+
+
+        }else {
             openDialog();
-            startActivity(new Intent(MainActivity.this,main_page.class));
+        }
+
+
+        if(true){ //UNFINISHED Add code to check for valid  login
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //
         }
         else
             openDialog();
