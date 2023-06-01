@@ -3,7 +3,6 @@ package com.example.mcproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,9 +11,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.util.concurrent.CompletableFuture;
 
 public class sighn_up extends AppCompatActivity {
 
@@ -28,7 +26,7 @@ public class sighn_up extends AppCompatActivity {
         setContentView(R.layout.activity_sighn_up);
         configureCreateAccountButton();
         configureGoBackButton();
-        Log.d("", "test");
+
     }
 
 
@@ -39,35 +37,40 @@ public class sighn_up extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (checkUsername()&&checkPassword()&&checkPhoneNumber()&&checkAddress()&&checkFirstName()&&checkLastName()&&checkBiography()){
-                    EditText username = (EditText) findViewById(R.id.editTextTextUsername);
-                    EditText password = (EditText) findViewById(R.id.editTextTextPassword);
-                    EditText address  = (EditText) findViewById(R.id.editTextTextAddress);
-                    EditText pnum     = (EditText) findViewById(R.id.editTextTextPhoneNumber);
-                    EditText biography= (EditText) findViewById(R.id.editTextTextMultiLineBiography);
-                    EditText fname    = (EditText) findViewById(R.id.editTextTextFName);
-                    EditText lname    = (EditText) findViewById(R.id.editTextTextPassword);
-                    CheckBox cbox     = (CheckBox) findViewById(R.id.checkBoxAnnoynomous);
+                try {
+                    if (checkUsername()&&checkPassword()&&checkPhoneNumber()&&checkAddress()&&checkFirstName()&&checkLastName()&&checkBiography()){
+                        Log.d("SHouldnt RUn","Yet");
+                        EditText username = (EditText) findViewById(R.id.editTextTextUsername);
+                        EditText password = (EditText) findViewById(R.id.editTextTextPassword);
+                        EditText address  = (EditText) findViewById(R.id.editTextTextAddress);
+                        EditText pnum     = (EditText) findViewById(R.id.editTextTextPhoneNumber);
+                        EditText biography= (EditText) findViewById(R.id.editTextTextMultiLineBiography);
+                        EditText fname    = (EditText) findViewById(R.id.editTextTextFName);
+                        EditText lname    = (EditText) findViewById(R.id.editTextTextPassword);
+                        CheckBox cbox     = (CheckBox) findViewById(R.id.checkBoxAnnoynomous);
 
 
-                    String[] arr = new String[8];
-                    arr[0] = fname.getText().toString();
-                    arr[1] = lname.getText().toString();
-                    arr[2] = pnum.getText().toString();
-                    arr[3] = address.getText().toString();
-                    arr[4] = biography.getText().toString();
-                    arr[5] = ""+cbox.isChecked();
-                    arr[6] = username.getText().toString();
-                    arr[7] = password.getText().toString();
+                        String[] arr = new String[8];
+                        arr[0] = fname.getText().toString();
+                        arr[1] = lname.getText().toString();
+                        arr[2] = pnum.getText().toString();
+                        arr[3] = address.getText().toString();
+                        arr[4] = biography.getText().toString();
+                        arr[5] = ""+cbox.isChecked();
+                        arr[6] = username.getText().toString();
+                        arr[7] = password.getText().toString();
 
 
-                    try {
-                        okHttp.insertIntoUsers(arr);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
+                        try {
+                            okHttp.insertIntoUsers(arr);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        startActivity(new Intent(sighn_up.this, OkHttpClass.MainActivity.class));
                     }
-
-                    startActivity(new Intent(sighn_up.this, MainActivity.class));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
 
             }
@@ -75,10 +78,21 @@ public class sighn_up extends AppCompatActivity {
 
     }
 
-    public boolean checkUsername(){
+
+
+
+    public boolean checkUsername() throws Exception {
         EditText et1 = (EditText) findViewById(R.id.editTextTextUsername);
         if (et1.getText().length() != 0){
-            return true;
+            CompletableFuture<String> futureResult = okHttp.checkIfUsernameExists(et1.getText().toString());
+            String check = futureResult.get();
+            if (check.equalsIgnoreCase("[]")){
+                return true;
+            }else {
+                openDialog("Username Is Already In Use");
+                return false;
+            }
+
 
         }else{
             openDialog("Invalid Username was entered");
@@ -173,7 +187,7 @@ public class sighn_up extends AppCompatActivity {
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(sighn_up.this, MainActivity.class));
+                startActivity(new Intent(sighn_up.this, OkHttpClass.MainActivity.class));
             }
         });
 

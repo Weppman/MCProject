@@ -1,19 +1,17 @@
 package com.example.mcproject;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.os.AsyncTask;
-import android.renderscript.Sampler;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
+import java.util.concurrent.CompletableFuture;
 
 import okhttp3.*;
 
@@ -21,7 +19,7 @@ public class OkHttpClass {
 
     private final OkHttpClient client = new OkHttpClient();
     public String hold;
-    public boolean finished;
+    boolean finished;
 
 
 
@@ -132,9 +130,170 @@ public class OkHttpClass {
 
     }
 
+    public CompletableFuture<String> checkIfUsernameExists(String user) throws  Exception{
+        CompletableFuture<String> cf1 = new CompletableFuture<>();
+
+
+
+        Request request = new Request.Builder()
+                .url("https://lamp.ms.wits.ac.za/home/s2601486/CheckUsernameTaken.php?username="+user)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+
+                    }
+
+
+                    hold =responseBody.string();
+                    cf1.complete(hold);
+
+                }
+
+
+            }
+
+        });
+
+
+        return cf1;
 
 
 
 
 
+    }
+
+
+    public CompletableFuture<String> checkIfPassWordUserNameCorrect(String user) throws  Exception{
+        CompletableFuture<String> cf1 = new CompletableFuture<>();
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/CheckUsernamePassword.php").newBuilder()
+                .addQueryParameter("username",user)
+                .build().newBuilder();
+
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+
+                    }
+
+
+                    hold =responseBody.string();
+                    cf1.complete(hold);
+
+                }
+
+
+            }
+
+        });
+
+
+        return cf1;
+
+
+
+
+
+    }
+
+    public static class MainActivity extends AppCompatActivity {
+        OkHttpClient client = new OkHttpClient();
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            requestWindowFeature(Window.FEATURE_NO_TITLE);//
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getSupportActionBar().hide();//This hides title and action bar
+
+            setContentView(R.layout.activity_sighn_in);
+            configureSignInButton();
+            configureCreateAccountButton();
+
+
+            Log.d("", "test");
+
+
+        }
+
+        private void configureCreateAccountButton() {
+
+            Button createAcc = (Button) findViewById(R.id.btnCreateAccount);
+            createAcc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(MainActivity.this, sighn_up.class));
+                }
+            });
+
+        }
+
+        private void configureSignInButton() {
+
+            Button createAcc = (Button) findViewById(R.id.btnSighnIn);
+            createAcc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //startActivity(new Intent(MainActivity.this, main_page.class));
+
+                    //startActivity(new Intent(MainActivity.this,main_page.class));
+                    checkIfValidLogin();
+
+
+                }
+            });
+
+        }
+
+
+
+
+        public void checkIfValidLogin(){
+            boolean t=true;
+            if(t==true){ //UNFINISHED Add code to check for valid  login
+                openDialog();
+                startActivity(new Intent(MainActivity.this,main_page.class));
+            }
+            else
+                openDialog();
+        }
+        public void openDialog(){
+            FailedSignIn failedSignIn = new FailedSignIn();
+            failedSignIn.show(getSupportFragmentManager(),"Error");
+        }
+
+
+
+
+    }
 }
