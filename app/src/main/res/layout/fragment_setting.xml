@@ -205,7 +205,7 @@
         android:id="@+id/BiographyButton"
         android:textColor="@color/white"
         android:text="Update Biography"
-        android:textSize="10sp"
+        android:textSize= "10sp"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/BiographyUpdate"
         android:layout_marginLeft="45dp"
