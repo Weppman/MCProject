@@ -19,6 +19,8 @@ public class main_page extends AppCompatActivity {
     public ListFragment listFragment = new ListFragment();
     public DonateFragment donateFragment = new DonateFragment();
     public SettingFragment settingFragment = new SettingFragment();
+
+    public PendingDonationsFragment pendingDonationsFragment = new PendingDonationsFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,9 @@ public class main_page extends AppCompatActivity {
                         return true;
                     case (int)(R.id.setting):
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,settingFragment).commit();
+                        return true;
+                    case (int)(R.id.pendingDonation):
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,pendingDonationsFragment).commit();
                         return true;
                 }
 
