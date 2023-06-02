@@ -14,11 +14,11 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 
 public class main_page extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
-    HomeFragment homeFragment = new HomeFragment();
-    ListFragment listFragment = new ListFragment();
-    DonateFragment donateFragment = new DonateFragment();
-    SettingFragment settingFragment = new SettingFragment();
+    public BottomNavigationView bottomNavigationView;
+    public HomeFragment homeFragment = new HomeFragment();
+    public ListFragment listFragment = new ListFragment();
+    public DonateFragment donateFragment = new DonateFragment();
+    public SettingFragment settingFragment = new SettingFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

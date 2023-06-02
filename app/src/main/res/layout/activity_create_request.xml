@@ -47,7 +47,7 @@
        android:layout_alignParentRight="true"
        android:textColor="@color/white"
        android:text="Item Selected:"
-       android:id="@+id/selItems"
+       android:id="@+id/selItems1"
        android:layout_toRightOf="@+id/etQuantityReq"
        android:layout_below="@+id/lvItemsReq"
        />

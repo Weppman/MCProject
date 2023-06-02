@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ public class CreateDonationActivity extends AppCompatActivity {
         listItems.add("Bread");
         listItems.add("Milk");
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,listItems);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listItems);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,6 +66,7 @@ public class CreateDonationActivity extends AppCompatActivity {
                 }
             }
         });
+        configureGoBackButton();
     }
 
     private void configureGoBackButton() {
@@ -73,9 +75,49 @@ public class CreateDonationActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CreateDonationActivity.this, MainActivity.class));
+                boolean tester = checkValidQuantity();
+                if(tester==true){
+                    //CODE TO ADD DONATION REQUEST
+                    openDialogEnd("Item Donation Created");
+                }
             }
         });
 
+    }
+    boolean checkValidQuantity(){
+        EditText et1 = (EditText) findViewById(R.id.etQuantityDono);
+        if (et1.getText().length() != 0){
+            try {
+                long iTest = Long.parseLong(String.valueOf(et1.getText()));
+                if (iTest<100){
+                    if(iTest>0){
+                        return true;
+                    }
+                    else{
+                        openDialog("Please enter a quantity greater than 0");
+                        return false;
+                    }
+                }else{
+                    openDialog("Please enter a quantity lower than 100");
+                    return false;
+                }
+            } catch (Exception e){
+                openDialog("An Invalid Quantity was entered");
+                return false;
+            }
+        }else{
+            openDialog("Please Enter a Quantity");
+            return false;
+        }
+    }
+    public void openDialog(String message){
+        FailedSignUp failedSignUp = new FailedSignUp();
+        failedSignUp.setMsg(message);
+        failedSignUp.show(getSupportFragmentManager(),"Error");
+    }
+    public void openDialogEnd(String message){
+        DialogSendHome failedSignUp = new DialogSendHome();
+        failedSignUp.setMsg(message);
+        failedSignUp.show(getSupportFragmentManager(),"Created");
     }
 }
