@@ -14,6 +14,7 @@ import org.json.JSONArray;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import okhttp3.*;
 
@@ -293,7 +294,7 @@ public class OkHttpClass {
             }
         });
     }
-    public JSONArray customSqlQuery(String sql) throws  Exception{
+    public CompletableFuture<String> customSqlQuery(String sql) throws  Exception{
         CompletableFuture<String> cf1 = new CompletableFuture<>();
 
         Request request = new Request.Builder()
@@ -313,7 +314,9 @@ public class OkHttpClass {
                     for (int i = 0, size = responseHeaders.size(); i < size; i++) {
                         System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
                     }
+
                     cf1.complete(responseBody.string());
+                   //Log.d("Testing",cf1.get());
                 }
             }
         });
@@ -321,7 +324,7 @@ public class OkHttpClass {
         JSONArray json = new JSONArray(cf1.get());
 
 
-        return json;
+        return cf1;
 
 
 
