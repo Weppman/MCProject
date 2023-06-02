@@ -99,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
             String gpass = ed2.getText().toString();
 
             if (name.equals(gname) && password.equals(gpass)){
+                CompletableFuture<String> cf1 = ok.getUserDetails(name);
+                JSONArray js1 = new JSONArray(cf1.get());
+
+                UserData StartUser = new UserData(js1);
+
                 startActivity(new Intent(MainActivity.this,main_page.class));
 
 
@@ -113,28 +118,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        if(true){ //UNFINISHED Add code to check for valid  login
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //
-        }
-        else
-            openDialog();
     }
     public void openDialog(){
         FailedSignIn failedSignIn = new FailedSignIn();
