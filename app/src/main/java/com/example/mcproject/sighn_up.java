@@ -67,7 +67,7 @@ public class sighn_up extends AppCompatActivity {
                             throw new RuntimeException(e);
                         }
 
-                        startActivity(new Intent(sighn_up.this, MainActivity.class));
+                        openDialogEnd("Account Created Successfully");
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -197,6 +197,12 @@ public class sighn_up extends AppCompatActivity {
         FailedSignUp failedSignUp = new FailedSignUp();
         failedSignUp.setMsg(message);
         failedSignUp.show(getSupportFragmentManager(),"Error");
+    }
+
+    public void openDialogEnd(String message){
+        DialogSendSignIn failedSignUp = new DialogSendSignIn();
+        failedSignUp.setMsg(message);
+        failedSignUp.show(getSupportFragmentManager(),"Created");
     }
 
 }

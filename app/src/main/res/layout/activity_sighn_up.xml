@@ -222,7 +222,7 @@
         android:layout_marginTop="9dp"
         android:background="#3E3E3E"
         android:ems="10"
-        android:gravity="fill"
+        android:gravity="top|left"
         android:hint="Write a Biography"
         android:inputType="textMultiLine"
         android:textColor="#FFFFFF"
