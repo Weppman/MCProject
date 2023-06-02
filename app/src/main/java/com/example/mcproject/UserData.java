@@ -19,6 +19,8 @@ public class UserData {
     public UserData(JSONArray jsonArray ) throws JSONException {
         JSONObject js1 = jsonArray.getJSONObject(0);
 
+
+
         user = js1.getString("Username");
         password = js1.getString("Password");
         fname = js1.getString("FName");
