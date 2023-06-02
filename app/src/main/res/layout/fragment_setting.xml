@@ -32,7 +32,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Anonymous"
+        android:id="@+id/anonymous"
         android:layout_below="@id/update_Anonymous"
         android:background="#3E3E3E"
         android:outlineProvider="background"
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/PasswordUpdate"
-        android:layout_below="@id/PhoneNoUpdate"
+        android:layout_below="@id/phoneNoUpdate"
         android:textColor="@color/white"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="5dp"
@@ -53,7 +53,7 @@
         tools:layout_editor_absoluteY="99dp"
         android:text="Change Password"/>
     <EditText
-        android:id="@+id/Password"
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_below="@id/PasswordUpdate"
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Address"
-        android:layout_below="@+id/Password"
+        android:layout_below="@+id/password"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="5dp"
         android:text="Change Address"
@@ -79,7 +79,7 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="301dp"/>
     <EditText
-        android:id="@+id/ChangeAddress"
+        android:id="@+id/changeAddress"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_below="@id/Address"
@@ -97,7 +97,7 @@
         android:id="@+id/Biography"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ChangeAddress"
+        android:layout_below="@+id/changeAddress"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="5dp"
         android:text="Change Biography"
@@ -106,7 +106,7 @@
         tools:layout_editor_absoluteY="497dp" />
 
     <EditText
-        android:id="@+id/BiographyUpdate"
+        android:id="@+id/biographyUpdate"
         android:layout_width="319dp"
         android:layout_height="100dp"
         android:layout_below="@+id/Biography"
@@ -126,7 +126,7 @@
         android:id="@+id/PhoneNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Anonymous"
+        android:layout_below="@+id/anonymous"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="5dp"
         android:text="Change Phone Number"
@@ -135,7 +135,7 @@
         tools:layout_editor_absoluteY="234dp" />
 
     <EditText
-        android:id="@+id/PhoneNoUpdate"
+        android:id="@+id/phoneNoUpdate"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_below="@+id/PhoneNo"
@@ -206,7 +206,7 @@
         android:text="Update Biography"
         android:textSize= "10sp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/BiographyUpdate"
+        android:layout_below="@id/biographyUpdate"
         android:layout_marginLeft="45dp"
         />
 

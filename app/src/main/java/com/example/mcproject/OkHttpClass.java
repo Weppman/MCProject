@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
@@ -18,62 +20,11 @@ import okhttp3.*;
 public class OkHttpClass {
 
     private final OkHttpClient client = new OkHttpClient();
-    public String hold;
-    boolean finished;
-
-
-
-    public String run() throws Exception {
-
-        finished = false;
-        Request request = new Request.Builder()
-                .url("https://lamp.ms.wits.ac.za/home/s2601486/Users.php")
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-           public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            public void onResponse(Call call, Response response) throws IOException {
-                try (ResponseBody responseBody = response.body()) {
-                    if (!response.isSuccessful())
-                        throw new IOException("Unexpected code " + response);
-
-                    Headers responseHeaders = response.headers();
-                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
-                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-
-
-                    }
-
-
-                    hold =responseBody.string();
-
-                    finished = true;
-                }
-
-
-            }
-
-        });
-        while(!finished){
-            Thread.sleep(100);
-        }
-
-        return hold;
-
-
-
-
-    }
-
     public void insertIntoUsers(String[] arr) throws Exception{
         int x = 0;
         if (arr[5].equalsIgnoreCase("true")){
             x = 1;
         }
-
 
         HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/UsersCreate.php").newBuilder()
                 .addQueryParameter("fname", arr[0])
@@ -84,21 +35,17 @@ public class OkHttpClass {
                 .addQueryParameter("anonymous",""+x)
                 .addQueryParameter("username",arr[6])
                 .addQueryParameter("password",arr[7])
-
                 .build().newBuilder();
-
 
         Request request = new Request.Builder()
                 .url(url.build())
                 .build();
-
 
         Log.d("test",url.toString());
         client.newCall(request).enqueue(new Callback() {
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
             }
-
             public void onResponse(Call call, Response response) throws IOException {
                 try (ResponseBody responseBody = response.body()) {
                     if (!response.isSuccessful())
@@ -107,33 +54,13 @@ public class OkHttpClass {
                     Headers responseHeaders = response.headers();
                     for (int i = 0, size = responseHeaders.size(); i < size; i++) {
                         System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-
-
                     }
-
-
-
-
-
                 }
-
-
             }
-
         });
-
-
-
-
-
-
-
     }
-
     public CompletableFuture<String> checkIfUsernameExists(String user) throws  Exception{
         CompletableFuture<String> cf1 = new CompletableFuture<>();
-
-
 
         Request request = new Request.Builder()
                 .url("https://lamp.ms.wits.ac.za/home/s2601486/CheckUsernameTaken.php?username="+user)
@@ -143,7 +70,6 @@ public class OkHttpClass {
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
             }
-
             public void onResponse(Call call, Response response) throws IOException {
                 try (ResponseBody responseBody = response.body()) {
                     if (!response.isSuccessful())
@@ -152,31 +78,13 @@ public class OkHttpClass {
                     Headers responseHeaders = response.headers();
                     for (int i = 0, size = responseHeaders.size(); i < size; i++) {
                         System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-
-
                     }
-
-
-                    hold =responseBody.string();
-                    cf1.complete(hold);
-
+                    cf1.complete(responseBody.string());
                 }
-
-
             }
-
         });
-
-
         return cf1;
-
-
-
-
-
     }
-
-
     public CompletableFuture<String> checkIfPassWordUserNameCorrect(String user) throws  Exception{
         CompletableFuture<String> cf1 = new CompletableFuture<>();
         HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/CheckUsernamePassword.php").newBuilder()
@@ -192,7 +100,33 @@ public class OkHttpClass {
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
             }
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
 
+
+                    }
+                    String hold = responseBody.string();
+                    cf1.complete(hold);
+                }
+            }
+        });
+        return cf1;
+    }
+    public  CompletableFuture<String> getUserDetails(String user) throws  Exception{
+        CompletableFuture<String> cf1 = new CompletableFuture<>();
+
+        Request request = new Request.Builder()
+                .url("https://lamp.ms.wits.ac.za/home/s2601486/GetUser.php?username="+user)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
             public void onResponse(Call call, Response response) throws IOException {
                 try (ResponseBody responseBody = response.body()) {
                     if (!response.isSuccessful())
@@ -204,35 +138,193 @@ public class OkHttpClass {
 
 
                     }
-
-
-                    hold =responseBody.string();
+                    String hold =responseBody.string();
+                    Log.d("VLAUES OF STRING" , hold);
                     cf1.complete(hold);
-
                 }
+            }
+        });
+        return cf1;
+    }
+    public void updateAnonymous(String user , String anon) throws Exception{
 
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/UpdateAnonymous.php").newBuilder()
+                .addQueryParameter("anonymous", anon)
+                .addQueryParameter("username",user)
+                .build().newBuilder();
 
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
             }
 
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+    public void updatePhoneNumber(String user , String phoneNumber) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/UpdatePhoneNumber.php").newBuilder()
+                .addQueryParameter("pnum", phoneNumber)
+                .addQueryParameter("username",user)
+                .build().newBuilder();
+
+        Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                    }
+                }
+            }
+        });
+    }
+    public void updatePassword(String user , String password) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/UpdatePassword.php").newBuilder()
+                .addQueryParameter("password", password)
+                .addQueryParameter("username",user)
+                .build().newBuilder();
+
+        Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                    }
+                }
+            }
+        });
+    }
+    public void updateAddress(String user , String address) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/UpdateAddress.php").newBuilder()
+                .addQueryParameter("address", address)
+                .addQueryParameter("username",user)
+                .build().newBuilder();
+
+        Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+    public void updateBiography(String user , String biography) throws Exception{
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/UpdateBiography.php").newBuilder()
+                .addQueryParameter("biography", biography)
+                .addQueryParameter("username",user)
+                .build().newBuilder();
+
+        Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+    public JSONArray customSqlQuery(String sql) throws  Exception{
+        CompletableFuture<String> cf1 = new CompletableFuture<>();
+
+        Request request = new Request.Builder()
+                .url("https://lamp.ms.wits.ac.za/home/s2601486/CustomSql.php?sql="+sql)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                    }
+                    cf1.complete(responseBody.string());
+                }
+            }
         });
 
-
-        return cf1;
-
+        JSONArray json = new JSONArray(cf1.get());
 
 
-
-
-    }
-
-
-
-
-
-
-
-
+        return json;
 
 
 
     }
+
+}
