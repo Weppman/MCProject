@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2E2E2E"
+    tools:context=".ShowDonationDetailsActivity">
+
+    <TextView
+        android:id="@+id/tvFname"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:gravity="center"
+        android:text="First Name:"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/tvLname"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:gravity="center"
+        android:text="Last Name:"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_below="@+id/tvFname"/>
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:gravity="center"
+        android:text="Address:"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_below="@id/tvLname"/>
+    <TextView
+        android:id="@+id/tvCellNumber"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:gravity="center"
+        android:text="Cellphone Number:"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_below="@id/tvAddress"/>
+
+    <TextView
+        android:id="@+id/tvBiography"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:layout_below="@id/tvCellNumber"
+        android:layout_alignParentBottom="true"
+        android:gravity="top|left"
+        android:text="Biogaphy:"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</RelativeLayout>
