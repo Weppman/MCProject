@@ -133,8 +133,6 @@ public class OkHttpClass {
     public CompletableFuture<String> checkIfUsernameExists(String user) throws  Exception{
         CompletableFuture<String> cf1 = new CompletableFuture<>();
 
-
-
         Request request = new Request.Builder()
                 .url("https://lamp.ms.wits.ac.za/home/s2601486/CheckUsernameTaken.php?username="+user)
                 .build();
