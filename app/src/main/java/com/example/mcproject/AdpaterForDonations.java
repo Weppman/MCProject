@@ -42,8 +42,10 @@ public class AdpaterForDonations extends ArrayAdapter<String> {
         String item = iitems.get(position);
         holder.textView.setText(item);
 
+
+
         if (position == selectedPosition) {
-            holder.textView.setTextColor(Color.RED); // Change the color to your desired color
+            holder.textView.setTextColor(Color.CYAN); // Change the color to your desired color
         } else {
             holder.textView.setTextColor(Color.WHITE); // Change the color to your desired color
         }
