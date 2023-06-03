@@ -29,7 +29,7 @@ public class DonateFragment extends Fragment {
     OkHttpClass ok= new OkHttpClass();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_donate, container, false);
         listView = (ListView) view.findViewById(R.id.lvDonate);
 

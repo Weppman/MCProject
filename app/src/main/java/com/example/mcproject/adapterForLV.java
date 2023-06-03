@@ -62,7 +62,7 @@ public class adapterForLV extends BaseAdapter {
             inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.list_items_view,null);
+            convertView = inflater.inflate( R.layout.list_items_view,null);
         }
 
         TextView nameOfItem = (TextView) convertView.findViewById(R.id.nameInList);
