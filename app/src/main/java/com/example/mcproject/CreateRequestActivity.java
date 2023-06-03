@@ -49,6 +49,7 @@ public class CreateRequestActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String selectedItem = itemList.get(position);
                     TextView selectedItemsTextView = findViewById(R.id.selItems1);
+                    adpaterForDonations.setSelectedPosition(position);
                     selectedItemsTextView.setText(selectedItem);
                     try {
                         getSelectedItemID(selectedItem);
@@ -141,11 +142,28 @@ public class CreateRequestActivity extends AppCompatActivity {
                         arr[1] = ""+et1.getText().toString();
                         arr[2] = ""+UserData.UserID;
 
+                        JSONArray test = ok.customSqlQuery("SELECT * FROM Requested_Items WHERE UserID = " + UserData.UserID+";");
+                        if(test.length()==0){
+                            ok.insertIntoDonationItems(arr);
+                            openDialogEnd("Item Donation Created");
+
+                        }else{
+                            JSONArray subUser = ok.customSqlQuery("SELECT * FROM Requested_Items WHERE UserID = "+UserData.UserID+" AND ItemID = "+selectedItemID+";");
+                            int cval = subUser.getJSONObject(0).getInt("Quantity_Needed");
+                            if(cval<100){
+                                cval += Integer.parseInt(et1.getText().toString());
+                                ok.updateRequestedItems(Integer.parseInt(UserData.UserID),selectedItemID,cval);
+                                openDialogEnd("Item Donation Created");
+                            }else{
+                                openDialog("Too Many Of The Item Requested");
+
+                            }
+
+
+                        }
 
 
 
-                        ok.insertIntoDonationItems(arr);
-                        openDialogEnd("Item Donation Created");
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

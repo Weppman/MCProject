@@ -53,6 +53,7 @@ public class CreateDonationActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String selectedItem = itemList.get(position);
+                    adpaterForDonations.setSelectedPosition(position);
                     TextView selectedItemsTextView = findViewById(R.id.selItems);
                     selectedItemsTextView.setText(selectedItem);
                     try {
@@ -131,11 +132,28 @@ public class CreateDonationActivity extends AppCompatActivity {
                         arr[1] = ""+et1.getText().toString();
                         arr[2] = ""+UserData.UserID;
 
+                        JSONArray test = ok.customSqlQuery("SELECT * FROM Donation_Items WHERE UserID = " + UserData.UserID+";");
+                        if(test.length()==0){
+                            ok.insertIntoDonationRequest(arr);
+                            openDialogEnd("Item Donation Created");
+
+                        }else{
+                            JSONArray subUser = ok.customSqlQuery("SELECT * FROM Donation_Items WHERE UserID = "+UserData.UserID+" AND ItemID = "+selectedItemID+";");
+                            int cval = subUser.getJSONObject(0).getInt("Quantity_Donation");
+                            if(cval<100){
+                                cval += Integer.parseInt(et1.getText().toString());
+                                ok.updateDonatedItems(Integer.parseInt(UserData.UserID),selectedItemID,cval);
+                                openDialogEnd("Item Donation Created");
+                            }else{
+                                openDialog("Too Many Of The Item Requested");
+
+                            }
+
+
+                        }
 
 
 
-                        ok.insertIntoDonationRequest(arr);
-                        openDialogEnd("Item Donation Created");
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
