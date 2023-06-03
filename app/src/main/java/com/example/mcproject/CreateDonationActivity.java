@@ -77,13 +77,16 @@ public class CreateDonationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 boolean tester = checkValidQuantity();
                 if(tester==true){
-                    //CODE TO ADD DONATION REQUEST
+
                     openDialogEnd("Item Donation Created");
                 }
             }
         });
 
     }
+
+
+
     boolean checkValidQuantity(){
         EditText et1 = (EditText) findViewById(R.id.etQuantityDono);
         if (et1.getText().length() != 0){
@@ -120,4 +123,6 @@ public class CreateDonationActivity extends AppCompatActivity {
         failedSignUp.setMsg(message);
         failedSignUp.show(getSupportFragmentManager(),"Created");
     }
+
+
 }

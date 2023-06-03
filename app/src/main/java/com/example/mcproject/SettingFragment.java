@@ -30,7 +30,6 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         view = inflater.inflate(R.layout.fragment_setting, container, false);
         updateValues(view);
         updateAnonButton();
@@ -42,18 +41,6 @@ public class SettingFragment extends Fragment {
     }
 
     private void updateValues(View view) {
-
-
-        String username = UserData.user;
-        CompletableFuture<String> cf1;
-        try {
-            cf1 = ok.getUserDetails(username);
-            JSONArray js1 = new JSONArray(cf1.get());
-            UserData updateUserData = new UserData(js1);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
         CheckBox ch1 = view.findViewById(R.id.anonymous);
         ch1.setChecked(UserData.anon);
 
@@ -81,6 +68,7 @@ public class SettingFragment extends Fragment {
                         long iTest = Long.parseLong(String.valueOf(et1.getText()));
                         if (et1.getText().length() == 10){
                             try {
+                                UserData.anon = et1.isChecked();
                                 ok.updateAnonymous(UserData.user, ("" + et1.isChecked()).toUpperCase().toUpperCase());
                                 openDialog("","Success");
                             } catch (Exception e) {
@@ -115,7 +103,7 @@ public class SettingFragment extends Fragment {
             public void onClick(View view) {
 
                 try {
-
+                    UserData.phoneNumber = CPhoneNumber.getText().toString();
                     ok.updatePhoneNumber(UserData.user, CPhoneNumber.getText().toString());
 
                 } catch (Exception e) {
@@ -136,6 +124,7 @@ public class SettingFragment extends Fragment {
 
                 try {
                     if(!CAddress.getText().toString().equals("")){
+                        UserData.address = CAddress.getText().toString();
                         ok.updateAddress(UserData.user, CAddress.getText().toString());
                         openDialog("","Success");
                     }else{
@@ -161,6 +150,7 @@ public class SettingFragment extends Fragment {
 
                 try {
                     if(!CPassword.getText().toString().equals("")){
+                        UserData.password = CPassword.getText().toString();
                         ok.updatePassword(UserData.user, CPassword.getText().toString());
                         openDialog("", "Success");
                     }else{
@@ -185,7 +175,7 @@ public class SettingFragment extends Fragment {
             public void onClick(View view) {
 
                 try {
-
+                    UserData.biography = CPassword.getText().toString();
                     ok.updateBiography(UserData.user, CPassword.getText().toString());
                     openDialog("", "Success");
 
@@ -210,6 +200,8 @@ public class SettingFragment extends Fragment {
         failedSignUp.setHeader(header);
         failedSignUp.show(getParentFragmentManager(),"Error");
     }
+
+
 
 
 

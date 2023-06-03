@@ -36,11 +36,9 @@ public class DonateFragment extends Fragment {
         customAdapter = new adapterForLV(list,getContext());
         listView.setAdapter(customAdapter);
 
-        ListDetailsClass newData = new ListDetailsClass("Jarren","Downward","8 Allan","6969696969","Need kos");
-        ListDetailsClass newData2 = new ListDetailsClass("Josh","Wepp","His house","420420420","Need Bitches");
+
         list.clear();
-        list.add(newData);
-        list.add(newData2);
+
 
         try {
             CompletableFuture<String> cftemp=ok.customSqlQuery("SELECT FName,LName,Address,Phone_Num,Biography FROM Users INNER JOIN Requested_Items ON Users.UserID=Requested_Items.UserID;");
