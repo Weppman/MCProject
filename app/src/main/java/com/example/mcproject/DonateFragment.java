@@ -41,8 +41,8 @@ public class DonateFragment extends Fragment {
 
 
         try {
-            CompletableFuture<String> cftemp=ok.customSqlQuery("SELECT FName,LName,Address,Phone_Num,Biography FROM Users INNER JOIN Requested_Items ON Users.UserID=Requested_Items.UserID;");
-            JSONArray people = new JSONArray(cftemp.get());
+            JSONArray people =ok.customSqlQuery("SELECT FName,LName,Address,Phone_Num,Biography FROM Users INNER JOIN Requested_Items ON Users.UserID=Requested_Items.UserID;");
+
             for (int i =0 ; i < people.length();i++){
                 JSONObject person = people.getJSONObject(i);
                 String firstName=person.getString("FName");
