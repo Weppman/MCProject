@@ -47,12 +47,22 @@
     <TextView
         android:id="@+id/tvBiography"
         android:layout_width="match_parent"
-        android:layout_height="60sp"
+        android:layout_height="300sp"
         android:layout_below="@id/tvCellNumber"
-        android:layout_alignParentBottom="true"
         android:gravity="top|left"
         android:text="Biogaphy:"
         android:textColor="@color/white"
         android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnAccept"
+        android:layout_width="wrap_content"
+        android:layout_height="75sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="DONATE"
+        android:textSize="20sp"
+        android:layout_marginBottom="25sp"
+        />
 
 </RelativeLayout>

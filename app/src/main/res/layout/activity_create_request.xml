@@ -24,31 +24,41 @@
        android:id="@+id/lvItemsReq"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:layout_above="@+id/etQuantityReq"
+       android:layout_above="@+id/descReq"
        android:scrollbars="vertical" />
 
    <EditText
        android:id="@+id/etQuantityReq"
        android:layout_width="150dp"
        android:layout_height="70dp"
+       android:layout_marginTop="10sp"
        android:layout_above="@+id/backBtnReq"
        android:hint="Enter Quantity"
        android:textColorHint="#FFFFFF"
        android:textColor="@color/white"/>
 
    <TextView
+       android:id="@+id/selItems1"
        android:layout_width="150dp"
        android:layout_height="70dp"
-       android:layout_marginTop="10dp"
-       android:layout_marginBottom="10dp"
-       android:layout_marginLeft="15dp"
-       android:layout_marginRight="15dp"
-       android:textSize="20dp"
+       android:layout_below="@+id/descReq"
        android:layout_alignParentRight="true"
-       android:textColor="@color/white"
-       android:text="Item Selected:"
-       android:id="@+id/selItems1"
+       android:layout_marginLeft="15dp"
+       android:layout_marginTop="10dp"
+       android:layout_marginRight="15dp"
+       android:layout_marginBottom="10dp"
        android:layout_toRightOf="@+id/etQuantityReq"
-       android:layout_below="@+id/lvItemsReq"
+       android:gravity="left|center_vertical"
+       android:text="Item Selected:"
+       android:textColor="@color/white"
+       android:textSize="20dp" />
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="150sp"
+       android:id="@+id/descReq"
+       android:layout_above="@id/etQuantityReq"
+       android:text="Item Description:"
+       android:textSize="20sp"
+       android:textColor="@color/white"
        />
 </RelativeLayout>
