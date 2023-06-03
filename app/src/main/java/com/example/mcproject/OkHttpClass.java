@@ -294,7 +294,7 @@ public class OkHttpClass {
             }
         });
     }
-    public CompletableFuture<String> customSqlQuery(String sql) throws  Exception{
+    public JSONArray customSqlQuery(String sql) throws  Exception{
         CompletableFuture<String> cf1 = new CompletableFuture<>();
 
         Request request = new Request.Builder()
@@ -316,7 +316,11 @@ public class OkHttpClass {
                     }
 
                     cf1.complete(responseBody.string());
-                   //Log.d("Testing",cf1.get());
+                    Log.d("Testing",cf1.get());
+                } catch (ExecutionException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
@@ -324,10 +328,72 @@ public class OkHttpClass {
         JSONArray json = new JSONArray(cf1.get());
 
 
-        return cf1;
+        return json;
 
 
 
+    }
+    public void insertIntoDonationRequest(String[] arr) throws Exception{
+
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/DonationRequestCreate.php").newBuilder()
+                .addQueryParameter("itemid", arr[0])
+                .addQueryParameter("amount",arr[1])
+                .addQueryParameter("userid",arr[2])
+                .build().newBuilder();
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+
+        Log.d("test",url.toString());
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                    }
+                }
+            }
+        });
+    }
+    public void insertIntoDonationItems(String[] arr) throws Exception{
+
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/RequestItemsCreate.php").newBuilder()
+                .addQueryParameter("itemid", arr[0])
+                .addQueryParameter("amount",arr[1])
+                .addQueryParameter("userid",arr[2])
+                .build().newBuilder();
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+
+        Log.d("test",url.toString());
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                    }
+                }
+            }
+        });
     }
 
 }

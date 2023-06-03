@@ -5,7 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserData {
-
+    public static String UserID;
     public static String user;
     public static String password;
     public static String fname;
@@ -20,7 +20,7 @@ public class UserData {
         JSONObject js1 = jsonArray.getJSONObject(0);
 
 
-
+        UserID = js1.getString("UserID");
         user = js1.getString("Username");
         password = js1.getString("Password");
         fname = js1.getString("FName");
