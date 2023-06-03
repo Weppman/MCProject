@@ -33,8 +33,8 @@ public class CreateDonationActivity extends AppCompatActivity {
     private int selectedItemID;
     private JSONArray jsonArray;
     private ListView recyclerView;
-    private AdpaterForDonations adapter;
-    OkHttpClass ok = new OkHttpClass();
+
+    private OkHttpClass ok = new OkHttpClass();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

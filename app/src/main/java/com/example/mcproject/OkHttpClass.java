@@ -364,5 +364,36 @@ public class OkHttpClass {
             }
         });
     }
+    public void insertIntoDonationItems(String[] arr) throws Exception{
+
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/RequestItemsCreate.php").newBuilder()
+                .addQueryParameter("itemid", arr[0])
+                .addQueryParameter("amount",arr[1])
+                .addQueryParameter("userid",arr[2])
+                .build().newBuilder();
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+
+        Log.d("test",url.toString());
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                    }
+                }
+            }
+        });
+    }
 
 }
