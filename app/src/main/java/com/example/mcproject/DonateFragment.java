@@ -41,7 +41,7 @@ public class DonateFragment extends Fragment {
 
 
         try {
-            JSONArray people =ok.customSqlQuery("SELECT FName,LName,Address,Phone_Num,Biography,Quantity_Needed,Name FROM Users INNER JOIN Requested_Items ON Users.UserID=Requested_Items.UserID INNER JOIN Items ON Requested_Items.ItemID=Items.ItemID WHERE Users.UserID<>"+UserData.UserID+";");
+            JSONArray people =ok.customSqlQuery( "SELECT FName,LName,Address,Phone_Num,Biography,Quantity_Needed,Name FROM Users INNER JOIN Requested_Items ON Users.UserID=Requested_Items.UserID INNER JOIN Items ON Requested_Items.ItemID=Items.ItemID WHERE Users.UserID<>"+UserData.UserID+";");
 
             for (int i =0 ; i < people.length();i++){
                 JSONObject person = people.getJSONObject(i);
