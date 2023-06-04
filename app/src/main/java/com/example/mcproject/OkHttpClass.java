@@ -371,7 +371,6 @@ public class OkHttpClass {
 
 
         HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/RequestItemsCreate.php").newBuilder()
-                .addQueryParameter("itemid", arr[0])
                 .addQueryParameter("amount",arr[1])
                 .addQueryParameter("userid",arr[2])
                 .build().newBuilder();

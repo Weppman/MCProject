@@ -1,11 +1,13 @@
 package com.example.mcproject;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserData {
-    public static String UserID;
+    private static String UserID;
     public static String user;
     public static String password;
     public static String fname;
@@ -19,7 +21,7 @@ public class UserData {
     public UserData(JSONArray jsonArray ) throws JSONException {
         JSONObject js1 = jsonArray.getJSONObject(0);
 
-
+        Log.d("USERID",js1.getString("UserID"));
         UserID = js1.getString("UserID");
         user = js1.getString("Username");
         password = js1.getString("Password");
@@ -29,7 +31,6 @@ public class UserData {
         phoneNumber = js1.getString("Phone_Num");
         String anonValue = js1.getString("Anonymous");
         anon = "1".equals(anonValue);
-
         biography = js1.getString("Biography");
 
 
@@ -40,4 +41,9 @@ public class UserData {
 
 
     }
+
+    public static String getUserID(){
+        return UserID;
+    }
+
 }

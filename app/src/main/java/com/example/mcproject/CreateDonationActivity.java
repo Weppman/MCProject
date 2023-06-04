@@ -130,19 +130,19 @@ public class CreateDonationActivity extends AppCompatActivity {
                         String[] arr = new String[3];
                         arr[0] = ""+selectedItemID;
                         arr[1] = ""+et1.getText().toString();
-                        arr[2] = ""+UserData.UserID;
+                        arr[2] = ""+UserData.getUserID();
 
-                        JSONArray test = ok.customSqlQuery("SELECT * FROM Donation_Items WHERE UserID = " + UserData.UserID+";");
+                        JSONArray test = ok.customSqlQuery("SELECT * FROM Donation_Items WHERE UserID = "+UserData.getUserID()+" AND ItemID = "+selectedItemID+";");
                         if(test.length()==0){
                             ok.insertIntoDonationRequest(arr);
                             openDialogEnd("Item Donation Created");
 
                         }else{
-                            JSONArray subUser = ok.customSqlQuery("SELECT * FROM Donation_Items WHERE UserID = "+UserData.UserID+" AND ItemID = "+selectedItemID+";");
-                            int cval = subUser.getJSONObject(0).getInt("Quantity_Donation");
+
+                            int cval = test.getJSONObject(0).getInt("Quantity_Donation");
                             if(cval<100){
                                 cval += Integer.parseInt(et1.getText().toString());
-                                ok.updateDonatedItems(Integer.parseInt(UserData.UserID),selectedItemID,cval);
+                                ok.updateDonatedItems(Integer.parseInt(UserData.getUserID()),selectedItemID,cval);
                                 openDialogEnd("Item Donation Created");
                             }else{
                                 openDialog("Too Many Of The Item Requested");

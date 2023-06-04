@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -140,19 +141,23 @@ public class CreateRequestActivity extends AppCompatActivity {
                         String[] arr = new String[3];
                         arr[0] = ""+selectedItemID;
                         arr[1] = ""+et1.getText().toString();
-                        arr[2] = ""+UserData.UserID;
+                        arr[2] = ""+UserData.getUserID();
+                        Log.d("USERID", arr[2]);
 
-                        JSONArray test = ok.customSqlQuery("SELECT * FROM Requested_Items WHERE UserID = " + UserData.UserID+";");
+                        JSONArray test = ok.customSqlQuery("SELECT * FROM Requested_Items WHERE UserID = "+UserData.getUserID()+" AND ItemID = "+selectedItemID+";");
+                        Log.d("TEST LENGTH",""+test.length());
                         if(test.length()==0){
+                            Log.d("Inside If","TRUE");
                             ok.insertIntoDonationItems(arr);
                             openDialogEnd("Item Donation Created");
 
                         }else{
-                            JSONArray subUser = ok.customSqlQuery("SELECT * FROM Requested_Items WHERE UserID = "+UserData.UserID+" AND ItemID = "+selectedItemID+";");
-                            int cval = subUser.getJSONObject(0).getInt("Quantity_Needed");
+                            Log.d("Inside If","ELSE");
+
+                            int cval = test.getJSONObject(0).getInt("Quantity_Needed");
                             if(cval<100){
                                 cval += Integer.parseInt(et1.getText().toString());
-                                ok.updateRequestedItems(Integer.parseInt(UserData.UserID),selectedItemID,cval);
+                                ok.updateRequestedItems(Integer.parseInt(UserData.getUserID()),selectedItemID,cval);
                                 openDialogEnd("Item Donation Created");
                             }else{
                                 openDialog("Too Many Of The Item Requested");
