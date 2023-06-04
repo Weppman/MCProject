@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/livtViewList"
+         android:id="@+id/livtViewList"
         />
 
 </RelativeLayout>

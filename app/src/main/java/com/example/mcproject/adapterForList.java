@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class adapterForIncomming extends BaseAdapter {
-    ArrayList<ListDetailsIncomingClass> itemsInList;
+public class adapterForList extends BaseAdapter {
+    ArrayList<ListDetailsListClass> itemsInList;
     Context mContext;
 
     LayoutInflater inflater;
@@ -23,15 +23,15 @@ public class adapterForIncomming extends BaseAdapter {
         this.mContext = mContext;
     }
 
-    public ArrayList<ListDetailsIncomingClass> getItemsInList() {
+    public ArrayList<ListDetailsListClass> getItemsInList() {
         return itemsInList;
     }
 
-    public void setItemsInList(ArrayList<ListDetailsIncomingClass> itemsInList) {
+    public void setItemsInList(ArrayList<ListDetailsListClass> itemsInList) {
         this.itemsInList = itemsInList;
     }
 
-    public adapterForIncomming(ArrayList<ListDetailsIncomingClass> itemsInList, Context mContext) {
+    public adapterForList(ArrayList<ListDetailsListClass> itemsInList, Context mContext) {
         this.itemsInList = itemsInList;
         this.mContext = mContext;
     }
@@ -57,16 +57,16 @@ public class adapterForIncomming extends BaseAdapter {
             inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
-            convertView = inflater.inflate( R.layout.list_items_view_icog,null);
+            convertView = inflater.inflate( R.layout.list_items_view,null);
         }
 
         TextView nameOfItem = (TextView) convertView.findViewById(R.id.nameInList);
 
-        ListDetailsIncomingClass items = itemsInList.get(position);
+        ListDetailsListClass items = itemsInList.get(position);
 
-        String name =items.getfname();
+        String name =items.getname();
 
-        nameOfItem.setText( items.getfname()+" "+items.getquantity()+" "+items.getiname());
+        nameOfItem.setText( items.getname()+" Donated "+items.getquantity()+" Items");
 
         return convertView;
     }
