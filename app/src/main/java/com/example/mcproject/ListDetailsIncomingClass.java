@@ -5,7 +5,7 @@ public class ListDetailsIncomingClass {
     int quantity;
 
 
-    public ListDetailsIncomingClass(String fname,String iname,int quantity) {
+    public ListDetailsIncomingClass( String fname,String iname,int quantity) {
         this.fname =fname;
         this.iname = iname;
         this.quantity=quantity;
