@@ -154,7 +154,7 @@ public class CreateDonationActivity extends AppCompatActivity {
 
 
 
-                    } catch (Exception e) {
+                    } catch ( Exception e) {
                         throw new RuntimeException(e);
                     }
 
