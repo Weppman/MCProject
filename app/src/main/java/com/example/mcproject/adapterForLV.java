@@ -69,9 +69,9 @@ public class adapterForLV extends BaseAdapter {
 
         ListDetailsClass items = itemsInList.get(position);
 
-        String name = items.getfname();
+        String name =items.getfname();
 
-        nameOfItem.setText(items.getfname());
+        nameOfItem.setText(items.getfname()+" Needs: "+items.quantityNeeded+" "+items.name);
 
         return convertView;
     }

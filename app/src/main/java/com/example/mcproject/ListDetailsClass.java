@@ -2,14 +2,18 @@ package com.example.mcproject;
 
 public class ListDetailsClass {
 
-    String fname,lname,address,cellnumber,biography;
+    String fname,lname,address,cellnumber,biography,name;
+    int quantityNeeded;
 
-    public ListDetailsClass(String fname,String lname,String address,String cellnumber,String biography) {
-        this.fname = fname;
+
+    public ListDetailsClass(String fname,String lname,String address,String cellnumber,String biography,String name,int quantityNeeded) {
+        this.fname =fname;
         this.lname = lname;
         this.address = address;
         this.cellnumber=cellnumber;
         this.biography=biography;
+        this.name = name;
+        this.quantityNeeded=quantityNeeded;
     }
 
     public String getfname() {
@@ -48,7 +52,22 @@ public class ListDetailsClass {
         return biography;
     }
 
-    public void setbiography(String address) {
+    public void setbiography(String biography) {
         this.biography = biography;
+    }
+
+    public String getname() {
+        return name;
+    }
+
+    public void setname(String name) {
+        this.name = name;
+    }
+
+    public int getQuantityNeeded(){
+        return quantityNeeded;
+    }
+    public void setQuantityNeeded(int quantityNeeded){
+        this.quantityNeeded=quantityNeeded;
     }
 }

@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 public class ShowDonationDetailsActivity extends AppCompatActivity {
-    TextView itemfname,itemlname,itemaddress,itemcellnumber,itembiography;
+    TextView itemfname,itemlname,itemaddress,itemcellnumber,itembiography,itemname,itemquantityneeded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,8 @@ public class ShowDonationDetailsActivity extends AppCompatActivity {
         itemaddress = (TextView) findViewById(R.id.tvAddress);
         itemcellnumber = (TextView) findViewById(R.id.tvCellNumber);
         itembiography = (TextView) findViewById(R.id.tvBiography);
+        itemname = (TextView) findViewById(R.id.tvShowItem);
+        itemquantityneeded = (TextView) findViewById(R.id.tvShowQuant);
 
         Intent i = getIntent();
         itemfname.setText("First Name: "+i.getStringExtra("Item_FName"));
@@ -31,5 +33,7 @@ public class ShowDonationDetailsActivity extends AppCompatActivity {
         itemaddress.setText("Address: "+i.getStringExtra("Item_Address"));
         itemcellnumber.setText("Cellphonenumber: "+i.getStringExtra("Item_Cellnumber"));
         itembiography.setText("Biography: "+i.getStringExtra("Item_Biography"));
+        itemname.setText("Item: "+i.getStringExtra("Item_Name"));
+        itemquantityneeded.setText("Quantity: "+i.getStringExtra("Item_QuantityNeeded"));
     }
 }

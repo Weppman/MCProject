@@ -9,49 +9,80 @@
 
     <TextView
         android:id="@+id/tvFname"
+        android:layout_marginTop="12sp"
         android:layout_width="match_parent"
         android:layout_height="60sp"
-        android:gravity="center"
+        android:gravity="left|center_vertical"
         android:text="First Name:"
         android:textColor="@color/white"
         android:textSize="20sp" />
+
     <TextView
         android:id="@+id/tvLname"
+        android:layout_marginTop="12sp"
         android:layout_width="match_parent"
         android:layout_height="60sp"
-        android:gravity="center"
+        android:layout_below="@+id/tvFname"
+        android:gravity="left|center_vertical"
         android:text="Last Name:"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_below="@+id/tvFname"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="match_parent"
+        android:layout_marginTop="12sp"
         android:layout_height="60sp"
-        android:gravity="center"
+        android:layout_below="@id/tvLname"
+        android:gravity="left|center_vertical"
         android:text="Address:"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_below="@id/tvLname"/>
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/tvCellNumber"
         android:layout_width="match_parent"
+        android:layout_marginTop="12sp"
         android:layout_height="60sp"
-        android:gravity="center"
+        android:layout_below="@id/tvAddress"
+        android:gravity="left|center_vertical"
         android:text="Cellphone Number:"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_below="@id/tvAddress"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvBiography"
         android:layout_width="match_parent"
         android:layout_height="204dp"
-        android:layout_below="@id/tvCellNumber"
-        android:layout_marginTop="96dp"
+        android:layout_below="@id/tvShowItem"
+        android:layout_marginTop="17sp"
         android:gravity="top|left"
         android:text="Biogaphy:"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvShowQuant"
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:layout_below="@+id/tvCellNumber"
+        android:layout_marginTop="12sp"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/tvShowItem"
+        android:gravity="left|center_vertical"
+        android:text="Quantity:"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvShowItem"
+        android:layout_width="200sp"
+        android:layout_height="96dp"
+        android:layout_below="@+id/tvCellNumber"
+        android:layout_marginTop="12sp"
+        android:layout_alignParentLeft="true"
+        android:gravity="left|center_vertical"
+        android:text="Item:"
         android:textColor="@color/white"
         android:textSize="20sp" />
 

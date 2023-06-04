@@ -10,7 +10,6 @@ public class UserData {
     public static String password;
     public static String fname;
     public static String lname;
-
     public static String phoneNumber;
     public static String address;
     public static Boolean anon;
@@ -31,13 +30,5 @@ public class UserData {
         anon = "1".equals(anonValue);
 
         biography = js1.getString("Biography");
-
-
-
-
-
-
-
-
     }
 }
