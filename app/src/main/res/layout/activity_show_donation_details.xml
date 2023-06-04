@@ -84,7 +84,7 @@
         android:gravity="left|center_vertical"
         android:text="Item:"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/btnAccept"
