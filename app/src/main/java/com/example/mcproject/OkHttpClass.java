@@ -463,4 +463,73 @@ public class OkHttpClass {
         });
     }
 
+    public JSONArray getDonorInfo(String values) throws  Exception{
+        CompletableFuture<String> cf1 = new CompletableFuture<>();
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/GetDonorInfo.php").newBuilder()
+                .addQueryParameter("values",values)
+                .build().newBuilder();
+
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+
+                    }
+                    String hold = responseBody.string();
+                    cf1.complete(hold);
+                }
+            }
+        });
+        //Log.d("Test",request.toString());
+        JSONArray js1 = new JSONArray(cf1.get());
+        return js1;
+    }
+
+    public JSONArray getRequestInfo(String values) throws  Exception{
+        CompletableFuture<String> cf1 = new CompletableFuture<>();
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/GetRequestInfo.php").newBuilder()
+                .addQueryParameter("values",values)
+                .build().newBuilder();
+
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+
+                    }
+                    String hold = responseBody.string();
+                    cf1.complete(hold);
+                }
+            }
+        });
+        Log.d("Test",request.toString());
+        JSONArray js1 = new JSONArray(cf1.get());
+        return js1;
+    }
 }
