@@ -6,12 +6,14 @@
     android:background="#2E2E2E"
     tools:context=".ListFragment">
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="List Fragment"
-        android:textSize="25dp"
-        android:textColor="#FFFFFF"
-        android:layout_centerInParent="true"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/livtViewList"
+        />
 
 </RelativeLayout>

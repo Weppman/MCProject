@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ShowDonationDetailsActivity extends AppCompatActivity {
     TextView itemfname,itemlname,itemaddress,itemcellnumber,itembiography,itemname,itemquantityneeded;
+    Button donate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +38,20 @@ public class ShowDonationDetailsActivity extends AppCompatActivity {
         itembiography.setText("Biography: "+i.getStringExtra("Item_Biography"));
         itemname.setText("Item: "+i.getStringExtra("Item_Name"));
         itemquantityneeded.setText("Quantity: "+i.getStringExtra("Item_QuantityNeeded"));
+
+        donate = findViewById(R.id.btnAccept);
+
+        donate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialogEnd("Donation Accepted");
+            }
+        });
+    }
+
+    public void openDialogEnd(String message){
+        DialogSendHome failedSignUp = new DialogSendHome();
+        failedSignUp.setMsg(message);
+        failedSignUp.show(getSupportFragmentManager(),"Created");
     }
 }

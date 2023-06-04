@@ -3,7 +3,7 @@ package com.example.mcproject;
 public class ListDetailsClass {
 
     String fname,lname,address,cellnumber,biography,name;
-    int quantityNeeded;
+    int quantityNeeded ;
 
 
     public ListDetailsClass(String fname,String lname,String address,String cellnumber,String biography,String name,int quantityNeeded) {

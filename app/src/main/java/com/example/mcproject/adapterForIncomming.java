@@ -7,14 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.mcproject.ListDetailsClass;
-import com.example.mcproject.R;
-
 import java.util.ArrayList;
 
-public class adapterForLV extends BaseAdapter {
-
-    ArrayList<ListDetailsClass> itemsInList;
+public class adapterForIncomming extends BaseAdapter {
+    ArrayList<ListDetailsIncomingClass> itemsInList;
     Context mContext;
 
     LayoutInflater inflater;
@@ -27,15 +23,15 @@ public class adapterForLV extends BaseAdapter {
         this.mContext = mContext;
     }
 
-    public ArrayList<ListDetailsClass> getItemsInList() {
+    public ArrayList<ListDetailsIncomingClass> getItemsInList() {
         return itemsInList;
     }
 
-    public void setItemsInList(ArrayList<ListDetailsClass> itemsInList) {
+    public void setItemsInList(ArrayList<ListDetailsIncomingClass> itemsInList) {
         this.itemsInList = itemsInList;
     }
 
-    public adapterForLV(ArrayList<ListDetailsClass> itemsInList, Context mContext) {
+    public adapterForIncomming(ArrayList<ListDetailsIncomingClass> itemsInList, Context mContext) {
         this.itemsInList = itemsInList;
         this.mContext = mContext;
     }
@@ -61,16 +57,16 @@ public class adapterForLV extends BaseAdapter {
             inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
-            convertView = inflater.inflate( R.layout.list_items_view,null);
+            convertView = inflater.inflate( R.layout.list_items_view_icog,null);
         }
 
         TextView nameOfItem = (TextView) convertView.findViewById(R.id.nameInList);
 
-        ListDetailsClass items = itemsInList.get(position);
+        ListDetailsIncomingClass items = itemsInList.get(position);
 
         String name =items.getfname();
 
-        nameOfItem.setText(items.getfname()+" Needs: "+items.quantityNeeded+" "+items.name);
+        nameOfItem.setText(items.getfname()+" "+items.getquantity()+" "+items.getiname());
 
         return convertView;
     }
