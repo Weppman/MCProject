@@ -38,7 +38,7 @@ public class DialogEndPending extends AppCompatDialogFragment {
                             JSONObject testi = test.getJSONObject(0);
                             String testii = ""+testi.getString("Quantity_Donations");
                             //System.out.println("testii:"+testii);
-                            if(testii.equals("null")){
+                            if(testii.equalsIgnoreCase("null")){
                                 ok.insertList(uID,itemNum);
                             }
                             else{
