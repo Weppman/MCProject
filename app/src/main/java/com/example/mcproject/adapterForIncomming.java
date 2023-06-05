@@ -66,7 +66,7 @@ public class adapterForIncomming extends BaseAdapter {
 
         String name =items.getfname();
 
-        nameOfItem.setText( items.getfname()+" "+items.getquantity()+" "+items.getiname());
+        nameOfItem.setText( items.getfname()+" "+items.getquantity()+" "+items.getiname()+"  Cell: "+items.cellNumber);
 
         return convertView;
     }

@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class PendingDonationsFragment extends Fragment {
 
@@ -28,6 +29,8 @@ public class PendingDonationsFragment extends Fragment {
     adapterForIncomming customAdapter;
     adapterForIncomming customAdapterOutgoing;
     OkHttpClass ok= new OkHttpClass();
+
+    Vector<Integer> req = new Vector<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,10 +48,12 @@ public class PendingDonationsFragment extends Fragment {
 //        list.add(new ListDetailsIncomingClass("Steven","Pilk",3));
 
         try {
-        JSONArray requestID =ok.customSqlQuery("SELECT PendingDonationID FROM Users INNER JOIN Requested_Items ON Users.UserID=Requested_Items.UserID INNER JOIN PendingDonations on Requested_Items.RequestID=PendingDonations.RequestID WHERE Users.UserID="+UserData.UserID+";");
+        JSONArray requestID =ok.customSqlQuery("SELECT PendingDonationID,Requested_Items.RequestID FROM Users INNER JOIN Requested_Items ON Users.UserID=Requested_Items.UserID INNER JOIN PendingDonations on Requested_Items.RequestID=PendingDonations.RequestID WHERE Users.UserID="+UserData.UserID+";");
             for (int i = 0; i < requestID.length(); i++) {
                 JSONObject pid = requestID.getJSONObject(i);
                 int id =pid.getInt("PendingDonationID");
+                req.add(pid.getInt("RequestID"));
+
                 if(i!=requestID.length()-1){
                     pedIDR=pedIDR+id+",";
                 }
@@ -64,7 +69,9 @@ public class PendingDonationsFragment extends Fragment {
                     String firstName=donor.getString("FName");
                     int itemID = donor.getInt("QuantityItems");
                     String itemName = donor.getString("Name");
-                    list.add(new ListDetailsIncomingClass(firstName,itemName,itemID));
+                    String cellNo = donor.getString("Phone_Num");
+                    int hav = donor.getInt("HavesID");
+                    list.add(new ListDetailsIncomingClass(firstName,itemName,cellNo,itemID,hav));
                 }
             }
         } catch (Exception e) {
@@ -74,7 +81,15 @@ public class PendingDonationsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String firstName = customAdapter.getItemsInList().get(position).getfname();
+                String itemName = customAdapter.getItemsInList().get(position).getiname();
+                String cellNo = customAdapter.getItemsInList().get(position).getcellNumber();
+                int itemNum = customAdapter.getItemsInList().get(position).getquantity();
+                int havi = customAdapter.getItemsInList().get(position).gethavesID();
+                int reqi = req.get(position);
 
+                System.out.println(firstName+"  "+itemName+"  "+cellNo+"  "+itemNum+"  "+havi+"  "+reqi);
+                openDialogEnd("Have you received this donation?",itemNum,havi,reqi);
             }
         });
 
@@ -104,7 +119,9 @@ public class PendingDonationsFragment extends Fragment {
                     String firstName=donor.getString("FName");
                     int itemID = donor.getInt("QuantityItems");
                     String itemName = donor.getString("Name");
-                    listOutGoing.add(new ListDetailsIncomingClass(firstName,itemName,itemID));
+                    String cellNo = donor.getString("Phone_Num");
+                    int reqs = donor.getInt("RequestID");
+                    listOutGoing.add(new ListDetailsIncomingClass(firstName,itemName,cellNo,itemID,reqs));
                 }
             }
         } catch (Exception e) {
@@ -118,5 +135,14 @@ public class PendingDonationsFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    public void openDialogEnd(String message,int num,int havi,int reqi){
+        DialogEndPending failedSignUp = new DialogEndPending();
+        failedSignUp.setMsg(message);
+        failedSignUp.setitemNum(num);
+        failedSignUp.sethavesID(havi);
+        failedSignUp.setreqID(reqi);
+        failedSignUp.show(getParentFragmentManager(),"Created");
     }
 }
