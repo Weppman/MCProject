@@ -32,12 +32,13 @@ public class ListFragment extends Fragment {
         list.clear();
 
         try {
-            JSONArray people = ok.customSqlQuery("SELECT FName,Quantity_Donations FROM Users INNER JOIN Completed_Donations ON Users.UserID=Completed_Donations.UserID;");
+            JSONArray people = ok.customSqlQuery("SELECT FName,Quantity_Donations,Anonymous FROM Users INNER JOIN Completed_Donations ON Users.UserID=Completed_Donations.UserID;");
             for (int i =0 ; i < people.length();i++){
                 JSONObject person = people.getJSONObject(i);
                 String firstName=person.getString("FName");
                 int lastName=person.getInt("Quantity_Donations");
-                ListDetailsListClass temp = new ListDetailsListClass(firstName,lastName);
+                boolean anon = (person.getInt("Anonymous") == 1);
+                ListDetailsListClass temp = new ListDetailsListClass(firstName,lastName,anon);
                 list.add(temp);
             }
 

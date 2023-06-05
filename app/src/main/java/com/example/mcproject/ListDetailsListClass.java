@@ -3,18 +3,25 @@ package com.example.mcproject;
 public class ListDetailsListClass {
     String name;
     int quantity;
+    boolean anon;
 
-
-    public ListDetailsListClass( String fname,int quantity) {
+    public ListDetailsListClass( String fname,int quantity,boolean anon) {
         this.name =fname;
         this.quantity=quantity;
+        this.anon = anon;
     }
 
     public String getname() {
-        return name;
+        if(anon){
+            return "Anonymous";
+        }else{
+            return name;
+        }
+
     }
 
     public void setname(String name) {
+
         this.name = name;
     }
 

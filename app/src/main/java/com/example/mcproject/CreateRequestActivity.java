@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -51,6 +52,10 @@ public class CreateRequestActivity extends AppCompatActivity {
                     TextView selectedItemsTextView = findViewById(R.id.selItems1);
                     adpaterForDonations.setSelectedPosition(position);
                     selectedItemsTextView.setText(selectedItem);
+
+
+
+
                     try {
                         getSelectedItemID(selectedItem);
                     } catch (JSONException e) {
@@ -112,6 +117,14 @@ public class CreateRequestActivity extends AppCompatActivity {
                 selectedItemID = temp.getInt("ItemID");
             }
         }
+
+        try {
+            TextView desc = (TextView) findViewById(R.id.descReq);
+            JSONArray jsDesc = ok.customSqlQuery("SELECT * FROM Items WHERE ItemID = " +selectedItemID + ";");
+            desc.setText(jsDesc.getJSONObject(0).getString("Description"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private List<String> convertJsontoList(JSONArray arr) throws JSONException {
@@ -137,19 +150,20 @@ public class CreateRequestActivity extends AppCompatActivity {
                 boolean tester = checkValidQuantity();
                 if(tester==true){
                     try {
+
                         String[] arr = new String[3];
                         arr[0] = ""+selectedItemID;
                         arr[1] = ""+et1.getText().toString();
                         arr[2] = ""+UserData.UserID;
 
-                        JSONArray test = ok.customSqlQuery("SELECT * FROM Requested_Items WHERE UserID = " + UserData.UserID+";");
+                        JSONArray test = ok.customSqlQuery("SELECT * FROM Requested_Items WHERE UserID = "+UserData.UserID+" AND ItemID = "+selectedItemID+";");
                         if(test.length()==0){
                             ok.insertIntoDonationItems(arr);
                             openDialogEnd("Item Donation Created");
 
                         }else{
-                            JSONArray subUser = ok.customSqlQuery("SELECT * FROM Requested_Items WHERE UserID = "+UserData.UserID+" AND ItemID = "+selectedItemID+";");
-                            int cval = subUser.getJSONObject(0).getInt("Quantity_Needed");
+
+                            int cval = test.getJSONObject(0).getInt("Quantity_Needed");
                             if(cval<100){
                                 cval += Integer.parseInt(et1.getText().toString());
                                 ok.updateRequestedItems(Integer.parseInt(UserData.UserID),selectedItemID,cval);

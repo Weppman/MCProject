@@ -64,8 +64,6 @@ public class adapterForList extends BaseAdapter {
 
         ListDetailsListClass items = itemsInList.get(position);
 
-        String name =items.getname();
-
         nameOfItem.setText( items.getname()+" Donated "+items.getquantity()+" Items");
 
         return convertView;
