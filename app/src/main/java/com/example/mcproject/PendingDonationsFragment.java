@@ -58,7 +58,7 @@ public class PendingDonationsFragment extends Fragment {
                 //System.out.println(pedIDR);
             }
             if(!pedIDR.equals("")){
-                JSONArray reqInfo = ok.getDonorInfo(pedIDR);
+                JSONArray reqInfo = ok.getRequestInfo(pedIDR);
                 for (int j = 0; j < reqInfo.length(); j++) {
                     JSONObject donor = reqInfo.getJSONObject(j);
                     String firstName=donor.getString("FName");

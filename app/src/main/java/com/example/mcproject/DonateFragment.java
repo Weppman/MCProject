@@ -41,7 +41,7 @@ public class DonateFragment extends Fragment {
 
 
         try {
-            JSONArray people =ok.customSqlQuery( "SELECT FName,LName,Address,Phone_Num,Biography,Quantity_Needed,Name FROM Users INNER JOIN Requested_Items ON Users.UserID=Requested_Items.UserID INNER JOIN Items ON Requested_Items.ItemID=Items.ItemID WHERE Users.UserID<>"+UserData.UserID+";");
+            JSONArray people =ok.customSqlQuery( "SELECT FName,LName,Address,Phone_Num,Biography,Quantity_Needed,Name,RequestID FROM Users INNER JOIN Requested_Items ON Users.UserID=Requested_Items.UserID INNER JOIN Items ON Requested_Items.ItemID=Items.ItemID INNER JOIN Donation_Items ON Requested_Items.ItemID=Donation_Items.ItemID WHERE Users.UserID<>"+UserData.UserID+";");
 
             for (int i =0 ; i < people.length();i++){
                 JSONObject person = people.getJSONObject(i);
@@ -52,7 +52,8 @@ public class DonateFragment extends Fragment {
                 String bio=person.getString("Biography");
                 String name = person.getString("Name");
                 int quant = person.getInt("Quantity_Needed");
-                ListDetailsClass temp = new ListDetailsClass(firstName,lastName,adress,pnum,bio,name,quant);
+                int requestID = person.getInt("RequestID");
+                ListDetailsClass temp = new ListDetailsClass(firstName,lastName,adress,pnum,bio,name,quant,requestID);
                 list.add(temp);
             }
         } catch (Exception e) {
@@ -70,7 +71,9 @@ public class DonateFragment extends Fragment {
                 String biography = customAdapter.getItemsInList().get(position).getbiography();
                 String name = customAdapter.getItemsInList().get(position).getname();
                 int quant = customAdapter.getItemsInList().get(position).getQuantityNeeded();
+                int rID = customAdapter.getItemsInList().get(position).getrequestID();
                 String quants = ""+quant;
+                String rIDs =""+rID;
 
 
                 Intent i = new Intent(getContext(),ShowDonationDetailsActivity.class);
@@ -81,6 +84,7 @@ public class DonateFragment extends Fragment {
                 i.putExtra("Item_Biography",biography);
                 i.putExtra("Item_Name",name);
                 i.putExtra("Item_QuantityNeeded",quants);
+                i.putExtra("RequestID",rIDs);
                 startActivity(i);
             }
         });

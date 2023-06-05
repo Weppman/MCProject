@@ -3,10 +3,10 @@ package com.example.mcproject;
 public class ListDetailsClass {
 
     String fname,lname,address,cellnumber,biography,name;
-    int quantityNeeded ;
+    int quantityNeeded,requestID;
 
 
-    public ListDetailsClass(String fname,String lname,String address,String cellnumber,String biography,String name,int quantityNeeded) {
+    public ListDetailsClass(String fname,String lname,String address,String cellnumber,String biography,String name,int quantityNeeded, int requestID) {
         this.fname =fname;
         this.lname = lname;
         this.address = address;
@@ -14,6 +14,7 @@ public class ListDetailsClass {
         this.biography=biography;
         this.name = name;
         this.quantityNeeded=quantityNeeded;
+        this.requestID=requestID;
     }
 
     public String getfname() {
@@ -69,5 +70,12 @@ public class ListDetailsClass {
     }
     public void setQuantityNeeded(int quantityNeeded){
         this.quantityNeeded=quantityNeeded;
+    }
+
+    public int getrequestID(){
+        return requestID;
+    }
+    public void setrequestID(int requestID){
+        this.requestID=requestID;
     }
 }
