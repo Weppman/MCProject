@@ -63,30 +63,51 @@ public class SettingFragment extends Fragment {
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (et1.getText().length() != 0){
+                if(et1.isChecked()==true){
+                    UserData.anon = et1.isChecked();
                     try {
-                        long iTest = Long.parseLong(String.valueOf(et1.getText()));
-                        if (et1.getText().length() == 10){
-                            try {
-                                UserData.anon = et1.isChecked();
-                                ok.updateAnonymous(UserData.user, ("" + et1.isChecked()).toUpperCase().toUpperCase());
-                                openDialog("","Success");
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-
-                        }else{
-                            openDialog("Invalid Phone number was entered","Error");
-
-                        }
-                    } catch (Exception e){
-                        openDialog("Invalid Phone number was entered","Error");
-
+                        ok.updateAnonymous(UserData.user, ("" + et1.isChecked()).toUpperCase().toUpperCase());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
-                }else{
-                    openDialog("Invalid Phone number was entered","Error");
-
+                    openDialog("","Success");
+                }else if(et1.isChecked()==false){
+                    UserData.anon = et1.isChecked();
+                    try {
+                        ok.updateAnonymous(UserData.user, ("" + et1.isChecked()).toUpperCase().toUpperCase());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                    openDialog("","Success");
+                }else
+                {
+                    openDialog("","Error");
                 }
+
+//                if (et1.getText().length() != 0){
+//                    try {
+//                        long iTest = Long.parseLong(String.valueOf(et1.getText()));
+//                        if (et1.getText().length() == 10){
+//                            try {
+//                                UserData.anon = et1.isChecked();
+//                                ok.updateAnonymous(UserData.user, ("" + et1.isChecked()).toUpperCase().toUpperCase());
+//                                openDialog("","Success");
+//                            } catch (Exception e) {
+//                                throw new RuntimeException(e);
+//                            }
+//
+//                        }else{
+//                            openDialog("","Error");
+//
+//                        }
+//                    } catch (Exception e){
+//                        openDialog("","Error");
+//
+//                    }
+//                }else{
+//                    openDialog("","Error");
+//
+//                }
 
 
 
