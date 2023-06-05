@@ -300,7 +300,7 @@ public class OkHttpClass {
         Request request = new Request.Builder()
                 .url("https://lamp.ms.wits.ac.za/home/s2601486/CustomSql.php?sql="+sql)
                 .build();
-
+        Log.d("test" , request.toString());
 
 
         client.newCall(request).enqueue(new Callback() {
@@ -604,6 +604,163 @@ public class OkHttpClass {
                 .addQueryParameter("requestID", ""+requestID)
                 .addQueryParameter("havesID",""+havesID)
                 .addQueryParameter("quantityItems",""+quantityItems)
+                .build().newBuilder();
+
+        //Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+
+    public void deleteReq(int reqID) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/DeleteReq.php").newBuilder()
+                .addQueryParameter("requestID", ""+reqID)
+                .build().newBuilder();
+
+        //Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+
+    public void deleteDono(int havesID) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/DeleteDono.php").newBuilder()
+                .addQueryParameter("havesID", ""+havesID)
+                .build().newBuilder();
+
+        //Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+
+    public void insertList(int userID,int quantityItems) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/InsertList.php").newBuilder()
+                .addQueryParameter("userID",""+userID)
+                .addQueryParameter("quantityItems",""+quantityItems)
+                .build().newBuilder();
+
+        Log.d("At The Insert" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+
+    public void updateList(int userID,int quantity) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/UpdateList.php").newBuilder()
+                .addQueryParameter("userID",""+userID)
+                .addQueryParameter("quantity",""+quantity)
+                .build().newBuilder();
+
+        Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+
+    public void deletePending(int pendingDonationID) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/DeletePending.php").newBuilder()
+                .addQueryParameter("pendingDonationID", ""+pendingDonationID)
                 .build().newBuilder();
 
         //Log.d("At The Update" , url.toString());

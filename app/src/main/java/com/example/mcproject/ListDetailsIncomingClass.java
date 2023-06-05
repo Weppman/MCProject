@@ -1,14 +1,17 @@
 package com.example.mcproject;
 
 public class ListDetailsIncomingClass {
-    String fname,iname;
-    int quantity;
+    String fname,iname,cellNumber;
+    int quantity,havesID;
 
 
-    public ListDetailsIncomingClass( String fname,String iname,int quantity) {
+    public ListDetailsIncomingClass( String fname,String iname,String cellNumber,int quantity,int havesID) {
         this.fname =fname;
         this.iname = iname;
         this.quantity=quantity;
+        this.cellNumber=cellNumber;
+        //this.requestedID=requestedID;
+        this.havesID=havesID;
     }
 
     public String getfname() {
@@ -27,10 +30,26 @@ public class ListDetailsIncomingClass {
         this.iname = iname;
     }
 
+    public String getcellNumber() {
+        return cellNumber;
+    }
+
+    public void setcellNumber(String cellNumber) {
+        this.cellNumber = cellNumber;
+    }
+
     public int getquantity(){
         return quantity;
     }
     public void setquantity(int quantity){
         this.quantity=quantity;
+    }
+
+
+    public int gethavesID(){
+        return havesID;
+    }
+    public void sethavesID(int havesID){
+        this.havesID=havesID;
     }
 }
