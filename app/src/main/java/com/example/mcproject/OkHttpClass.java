@@ -532,4 +532,102 @@ public class OkHttpClass {
         JSONArray js1 = new JSONArray(cf1.get());
         return js1;
     }
+
+    public void updateDonationItems(int userid ,int quantity,String name) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/UpdateDonationItems.php").newBuilder()
+                .addQueryParameter("quantity", ""+quantity)
+                .addQueryParameter("userID",""+userid)
+                .addQueryParameter("name",""+name)
+                .build().newBuilder();
+
+        Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+
+    public void updateRequestedItems(int quantity,int requestID) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/UpdateRequestedItems.php").newBuilder()
+                .addQueryParameter("quantity", ""+quantity)
+                .addQueryParameter("requestID",""+requestID)
+                .build().newBuilder();
+
+        //Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
+
+    public void insertIntoPending(int requestID,int havesID,int quantityItems) throws Exception{
+
+        HttpUrl.Builder url = HttpUrl.parse("https://lamp.ms.wits.ac.za/home/s2601486/InsertIntoPending.php").newBuilder()
+                .addQueryParameter("requestID", ""+requestID)
+                .addQueryParameter("havesID",""+havesID)
+                .addQueryParameter("quantityItems",""+quantityItems)
+                .build().newBuilder();
+
+        //Log.d("At The Update" , url.toString());
+
+        Request request = new Request.Builder()
+                .url(url.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            public void onResponse(Call call, Response response) throws IOException {
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
+
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+
+                    }
+                }
+            }
+        });
+    }
 }
